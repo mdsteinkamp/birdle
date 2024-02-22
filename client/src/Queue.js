@@ -13,10 +13,10 @@ export default class Queue {
     this.length = 0
   }
 
-  enque(data) {
+  enqueue(data) {
     const node = new Node(data)
     this.length ++
-    if(this.length === 0) {
+    if(this.length === 1) {
       this.first = node
       this.last = node
     } else {

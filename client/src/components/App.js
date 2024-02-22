@@ -6,20 +6,31 @@ import '../App.css';
 export default function App() {
   const [bird, setBird] = useState(null)
 
-  useEffect(() => {
-    fetch('https://nuthatch.lastelm.software/birds/100', {
-    headers: {
-      'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
+  const birds = new Queue
+
+  function findBird() {
+    for(let i = 0; i < 5; i++) {
+      const id = Math.floor(Math.random() * (1069)) + 1
+      console.log(id)
+      
+      fetch(`https://nuthatch.lastelm.software/birds/${id}`, {
+        headers: {
+          'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
+        }
+      })
+      .then((resp) => {
+        if (resp.ok) {
+          resp.json().then((bird) => birds.enqueue(bird));
+        }
+      })
     }
-  })
-  .then((resp) => {
-      if (resp.ok) {
-        resp.json().then((bird) => setBird(bird));
-      }
-    });
+  }
+
+  useEffect(() => {
+    findBird()
   }, [])
 
-  console.log(bird)
+  console.log(birds)
 
 
   return (
