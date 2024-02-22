@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Queue from '../Queue';
 import '../App.css';
 
 
@@ -23,6 +24,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <h1>Welcome to the BIRDLE</h1>
 
     </div>
   );
