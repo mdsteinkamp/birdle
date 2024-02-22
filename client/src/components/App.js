@@ -1,11 +1,29 @@
+import { useState, useEffect } from 'react';
 import '../App.css';
 
-function App() {
+
+export default function App() {
+  const [bird, setBird] = useState(null)
+
+  useEffect(() => {
+    fetch('https://nuthatch.lastelm.software/birds/100', {
+    headers: {
+      'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
+    }
+  })
+  .then((resp) => {
+      if (resp.ok) {
+        resp.json().then((bird) => setBird(bird));
+      }
+    });
+  }, [])
+
+  console.log(bird)
+
+
   return (
     <div className="App">
 
     </div>
   );
 }
-
-export default App;
