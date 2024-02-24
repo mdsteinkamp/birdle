@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Queue from '../Queue';
 import '../App.css';
+import BirdPage from './BirdPage'
 
 
 export default function App() {
@@ -35,22 +36,16 @@ export default function App() {
     }
   }, [])
 
-  function handleNextBird() {
+  function handleClick() {
     birds.dequeue()
     findBird()
-
   }
-
-  console.log(birdsList)
-
 
   return (
     (!birdsList) ? null : 
     <div className="App">
       <h1>Welcome to the BIRDLE</h1>
-      <h2>{birdsList.first.data.name}</h2>
-      <button onClick={handleNextBird}>Next bird</button>
-
+      <BirdPage bird={birdsList.first.data} onClick={handleClick} />
     </div>
   );
 }
