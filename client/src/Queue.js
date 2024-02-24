@@ -30,7 +30,7 @@ export default class Queue {
     if (this.length === 0) return undefined
     this.length --
     const temp = this.first
-    this.first = this.next
+    this.first = temp.next
     return temp.data
   }
 }

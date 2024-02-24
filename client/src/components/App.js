@@ -4,12 +4,11 @@ import '../App.css';
 
 
 export default function App() {
-  const [bird, setBird] = useState(null)
+  const [birdsList, setBirdsList] = useState(null)
 
   const birds = new Queue
 
   async function findBird() {
-    for(let i = 0; i < 5; i++) {
       const id = Math.floor(Math.random() * (1069)) + 1
       console.log(id)
       try {
@@ -18,34 +17,41 @@ export default function App() {
             'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
           }
         })
-        if (response.ok) {
-          const bird = await response.json()
-          birds.enqueue(bird)
-          console.log(birds)
+        if (!response.ok) {
+          console.log(response.statusText)
+          findBird()
         }
+        const bird = await response.json()
+        birds.enqueue(bird)
+        setBirdsList(birds)
       } catch(error) {
         console.log(error)
       }
-
-    }
   }
 
   useEffect(() => {
-    findBird()
+    for(let i = 0; i < 5; i++) {
+      findBird()
+    }
   }, [])
 
-  console.log(birds)
+  function handleNextBird() {
+    birds.dequeue()
+    findBird()
+
+  }
+
+  console.log(birdsList)
 
 
   return (
+    (!birdsList) ? null : 
     <div className="App">
       <h1>Welcome to the BIRDLE</h1>
+      <h2>{birdsList.first.data.name}</h2>
+      <button onClick={handleNextBird}>Next bird</button>
 
     </div>
   );
 }
 
-// const response = await fetch(`https://nuthatch.lastelm.software/birds/${id}`, {
-//   headers: {
-//     'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
-//   }})
