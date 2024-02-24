@@ -19,7 +19,7 @@ export default function App() {
           }
         })
         if (!response.ok) {
-          console.log(response.statusText)
+          console.log(response.statusText, id)
           findBird()
         }
         const bird = await response.json()
