@@ -8,21 +8,25 @@ export default function App() {
 
   const birds = new Queue
 
-  function findBird() {
+  async function findBird() {
     for(let i = 0; i < 5; i++) {
       const id = Math.floor(Math.random() * (1069)) + 1
       console.log(id)
-      
-      fetch(`https://nuthatch.lastelm.software/birds/${id}`, {
-        headers: {
-          'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
+      try {
+        const response = await fetch(`https://nuthatch.lastelm.software/birds/${id}`, {
+          headers: {
+            'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
+          }
+        })
+        if (response.ok) {
+          const bird = await response.json()
+          birds.enqueue(bird)
+          console.log(birds)
         }
-      })
-      .then((resp) => {
-        if (resp.ok) {
-          resp.json().then((bird) => birds.enqueue(bird));
-        }
-      })
+      } catch(error) {
+        console.log(error)
+      }
+
     }
   }
 
@@ -40,3 +44,8 @@ export default function App() {
     </div>
   );
 }
+
+// const response = await fetch(`https://nuthatch.lastelm.software/birds/${id}`, {
+//   headers: {
+//     'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
+//   }})

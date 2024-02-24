@@ -21,6 +21,7 @@ export default class Queue {
       this.last = node
     } else {
       this.last.next = node
+      this.last = node
     }
     return this
   }
