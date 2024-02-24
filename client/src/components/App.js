@@ -21,10 +21,11 @@ export default function App() {
         if (!response.ok) {
           console.log(response.statusText, id)
           findBird()
+        } else {
+          const bird = await response.json()
+          birds.enqueue(bird)
+          setBirdsList(birds)
         }
-        const bird = await response.json()
-        birds.enqueue(bird)
-        setBirdsList(birds)
       } catch(error) {
         console.log(error)
       }
