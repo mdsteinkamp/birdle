@@ -26,7 +26,6 @@ export default function BirdPage({ bird, onClickNext }) {
   console.log(image)
 
   return(
-    (bird.images.length < 1) ? handleNextBird() :
     <div>
       <h2>{bird.name}</h2>
       <img src={image} width={500} aspect-ratio={1 / 1} alt="bird?" />

@@ -20,7 +20,7 @@ export default function App() {
         })
         if (!response.ok) {
           console.log(response, id)
-          findBird()
+          findBird(bird => birds.enqueue(bird))
         } else {
           const bird = await response.json()
           setBird(bird)
@@ -36,7 +36,7 @@ export default function App() {
   useEffect(() => {
     // setBirdsList({current: {}, next: {}})
     for(let i = 0; i < 5; i++) {
-      findBird(bird => bird.images.length > 0 ? birds.enqueue(bird) : findBird())
+      findBird(bird => birds.enqueue(bird))
     }
     setVisibleBird(birds.first)
 
@@ -47,7 +47,7 @@ export default function App() {
     birds.dequeue()
     // console.log(birds)
     setBirdsList(birds)
-    findBird(bird => bird.images.length > 0 ? birds.enqueue(bird) : findBird())
+    findBird(bird => birds.enqueue(bird))
     console.log(birds)
     setVisibleBird(birds.first)
     setBirdsList(birds)
