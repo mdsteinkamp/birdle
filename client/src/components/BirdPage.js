@@ -6,7 +6,7 @@ export default function BirdPage({ bird, onClickNext }) {
   useEffect(() => {
     async function getImages() {
       try {
-        const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=AIzaSyB63JcEgZiiMGD_svwC8lA0IqNFvtZC0Eg&cx=e2e6b1e2c14314732&searchType=image&q=${bird.name}`)
+        const response = await fetch(`https://www.googleapis.com/customsearch/v1?key=<<API_KEY>>&cx=e2e6b1e2c14314732&searchType=image&q=${bird.name}`)
 
         const images = await response.json()
         console.log(images)
