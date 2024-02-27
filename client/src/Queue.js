@@ -31,6 +31,6 @@ export default class Queue {
     this.length --
     const temp = this.first
     this.first = temp.next
-    return temp.data
+    return this.first
   }
 }

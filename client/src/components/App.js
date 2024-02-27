@@ -6,7 +6,8 @@ import BirdPage from './BirdPage'
 const birds = new Queue
 
 export default function App() {
-  const [birdsList, setBirdsList] = useState(null)
+  const [birdsList, setBirdsList] = useState({current: {}, next: {}})
+  const [start, setStart] = useState(false)
   const [visibleBird, setVisibleBird] = useState(null)
 
   async function findBird(setBird) {
@@ -31,27 +32,38 @@ export default function App() {
   }
 
   useEffect(() => {
-    setVisibleBird(birds.first)
+    setBirdsList({current: {}, next: {}})
     for(let i = 0; i < 5; i++) {
       findBird(bird => birds.enqueue(bird))
     }
   }, [])
 
   function handleNextBird() {
+    console.log("fetching next bird")
     birds.dequeue()
-    setBirdsList(birds)
+    // console.log(birds)
+    // setBirdsList(birds)
     findBird(bird => birds.enqueue(bird))
+    console.log(birds)
+    setBirdsList({current: birds.first.data, next: birds.first.next.data})
+  }
+
+  function handleStart() {
+    setBirdsList({current: birds.first.data, next: birds.first.next.data})
+    setStart(true)
   }
 
   console.log(birds)
   console.log(birds.first)
+  console.log(birdsList)
 
   return (
-    (birds.length < 5) ? null : 
     <div className="App">
       <h1>Welcome to the BIRDLE</h1>
-      <BirdPage bird={birds.first} onClick={handleNextBird} />
+      <button onClick={handleStart}>Start Game</button>
+      {(!start) ? null : <BirdPage bird={birdsList.current} onClickNext={handleNextBird} />}
     </div>
   );
 }
 
+{/* <BirdPage bird={birdsList.current.data} onClickNext={handleNextBird} /> */}
