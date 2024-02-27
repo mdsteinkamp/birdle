@@ -34,10 +34,11 @@ export default function App() {
   }
 
   useEffect(() => {
-    setBirdsList({current: {}, next: {}})
+    // setBirdsList({current: {}, next: {}})
     for(let i = 0; i < 5; i++) {
-      findBird(bird => birds.enqueue(bird))
+      findBird(bird => bird.images.length > 0 ? birds.enqueue(bird) : findBird())
     }
+    setVisibleBird(birds.first)
 
   }, [])
 
@@ -45,8 +46,8 @@ export default function App() {
     console.log("fetching next bird")
     birds.dequeue()
     // console.log(birds)
-    // setBirdsList(birds)
-    findBird(bird => birds.enqueue(bird))
+    setBirdsList(birds)
+    findBird(bird => bird.images.length > 0 ? birds.enqueue(bird) : findBird())
     console.log(birds)
     setVisibleBird(birds.first)
     setBirdsList(birds)
@@ -64,7 +65,7 @@ export default function App() {
     <div className="App">
       <h1>Welcome to the BIRDLE</h1>
       {(!start) ? <button onClick={handleStart}>Start Game</button> : null}
-      {(!start) ? null : <BirdPage bird={birds.first.data} onClickNext={handleNextBird} />}
+      {(!start) ? null : <BirdPage bird={birdsList.first.data} onClickNext={handleNextBird} />}
     </div>
   );
 }
