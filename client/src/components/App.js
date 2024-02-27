@@ -25,6 +25,8 @@ export default function App() {
           const bird = await response.json()
           setBird(bird)
           setBirdsList(birds)
+          setVisibleBird(birds.first)
+
         }
       } catch(error) {
         console.log(error)
@@ -36,6 +38,7 @@ export default function App() {
     for(let i = 0; i < 5; i++) {
       findBird(bird => birds.enqueue(bird))
     }
+
   }, [])
 
   function handleNextBird() {
@@ -45,25 +48,23 @@ export default function App() {
     // setBirdsList(birds)
     findBird(bird => birds.enqueue(bird))
     console.log(birds)
-    setBirdsList({current: birds.first.data, next: birds.first.next.data})
+    setVisibleBird(birds.first)
+    setBirdsList(birds)
   }
 
   function handleStart() {
-    setBirdsList({current: birds.first.data, next: birds.first.next.data})
+    setBirdsList(birds)
     setStart(true)
   }
 
-  console.log(birds)
-  console.log(birds.first)
+  console.log(birds) 
   console.log(birdsList)
 
   return (
     <div className="App">
       <h1>Welcome to the BIRDLE</h1>
-      <button onClick={handleStart}>Start Game</button>
-      {(!start) ? null : <BirdPage bird={birdsList.current} onClickNext={handleNextBird} />}
+      {(!start) ? <button onClick={handleStart}>Start Game</button> : null}
+      {(!start) ? null : <BirdPage bird={birds.first.data} onClickNext={handleNextBird} />}
     </div>
   );
 }
-
-{/* <BirdPage bird={birdsList.current.data} onClickNext={handleNextBird} /> */}
