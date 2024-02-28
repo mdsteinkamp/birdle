@@ -9,6 +9,8 @@ export default function App() {
   const [birdsList, setBirdsList] = useState({current: {}, next: {}})
   const [start, setStart] = useState(false)
   const [visibleBird, setVisibleBird] = useState(null)
+  const [count, setCount] = useState(0)
+  const [birdNames, setBirdNames] = useState([])
 
   async function findBird(setBird) {
       const id = Math.floor(Math.random() * (1069)) + 1
@@ -27,12 +29,14 @@ export default function App() {
           setBirdsList(birds)
           setVisibleBird(birds.first)
           getImages()
+          setCount(count => count + 1)
 
         }
       } catch(error) {
         console.log(error)
       }
   }
+  console.log(count)
 
   useEffect(() => {
     for(let i = 0; i < 2; i++) {
@@ -42,6 +46,37 @@ export default function App() {
 
   }, [])
 
+  useEffect(() => {
+    async function findBirdNames() {
+      const page = Math.floor(Math.random() * (10)) + 1
+      try {
+        const response = await fetch(`https://nuthatch.lastelm.software/v2/birds?page=11&pageSize=100&operator=AND`, {
+          headers: {
+            'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
+          }
+        })
+        if (!response.ok) {
+          console.log(response)
+        } else {
+          const birds = await response.json()
+          // console.log(birds)
+          setBirdNames(birds)
+          console.log(birds.entities.map(bird => bird.name))
+          
+
+        }
+      } catch(error) {
+        console.log(error)
+      }
+  }
+  findBirdNames()
+}, [])
+
+// findBirdNames()
+//   if(count === 10){
+//     setCount(0)
+//     findBirdNames()
+//   }
 
   async function getImages() {
     if(birdsList.length == 1) {
@@ -67,10 +102,11 @@ export default function App() {
     }
   }
 
+
+
   function handleNextBird() {
     console.log("fetching next bird")
     birds.dequeue()
-    // console.log(birds)
     setBirdsList(birds)
     findBird(bird => birds.enqueue(bird))
     console.log(birds)
