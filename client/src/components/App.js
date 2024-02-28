@@ -26,6 +26,7 @@ export default function App() {
           setBird(bird)
           setBirdsList(birds)
           setVisibleBird(birds.first)
+          getImages()
 
         }
       } catch(error) {
@@ -34,13 +35,31 @@ export default function App() {
   }
 
   useEffect(() => {
-    // setBirdsList({current: {}, next: {}})
-    for(let i = 0; i < 5; i++) {
+    for(let i = 0; i < 2; i++) {
       findBird(bird => birds.enqueue(bird))
     }
     setVisibleBird(birds.first)
 
   }, [])
+
+  // useEffect(() => {
+    async function getImages() {
+      try {
+        const secondBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.next.data.name}`)
+
+        const images = await secondBirdResponse.json()
+        console.log(images)
+        // setImage(images.items[0].link)
+        birds.first.next.data.images[0] = images.items[0].link
+        console.log(birds.first.next)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  //   getImages()
+  // }, [birdsList])
+
+
 
   function handleNextBird() {
     console.log("fetching next bird")
@@ -58,8 +77,8 @@ export default function App() {
     setStart(true)
   }
 
-  console.log(birds) 
-  console.log(birdsList)
+  // console.log(birds) 
+  // console.log(birdsList)
 
   return (
     <div className="App">
