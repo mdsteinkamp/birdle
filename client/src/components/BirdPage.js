@@ -1,4 +1,5 @@
 import birdNames from "../BirdNamesArray"
+import BirdTestForm from "./BirdTestForm"
 
 export default function BirdPage({ bird, onClickNext }) {
 
@@ -19,8 +20,9 @@ export default function BirdPage({ bird, onClickNext }) {
     <div>
       <h2>{bird.name}</h2>
       <img src={bird.images[0]} width={500} aspect-ratio={1 / 1} alt="bird?" />
-      <button onClick={handleNextBird}>Next bird</button>
+      <BirdTestForm trueName={bird.name} fakeNames={cleanedFakeBirdNames} />
 
+      <button onClick={handleNextBird}>Next bird</button>
     </div>
 
   )
