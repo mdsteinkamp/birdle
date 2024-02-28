@@ -46,31 +46,31 @@ export default function App() {
 
   }, [])
 
-  useEffect(() => {
-    async function findBirdNames() {
-      const page = Math.floor(Math.random() * (10)) + 1
-      try {
-        const response = await fetch(`https://nuthatch.lastelm.software/v2/birds?page=11&pageSize=100&operator=AND`, {
-          headers: {
-            'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
-          }
-        })
-        if (!response.ok) {
-          console.log(response)
-        } else {
-          const birds = await response.json()
-          // console.log(birds)
-          setBirdNames(birds)
-          console.log(birds.entities.map(bird => bird.name))
+//   useEffect(() => {
+//     async function findBirdNames() {
+//       const page = Math.floor(Math.random() * (10)) + 1
+//       try {
+//         const response = await fetch(`https://nuthatch.lastelm.software/v2/birds?page=11&pageSize=100&operator=AND`, {
+//           headers: {
+//             'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
+//           }
+//         })
+//         if (!response.ok) {
+//           console.log(response)
+//         } else {
+//           const birds = await response.json()
+//           // console.log(birds)
+//           setBirdNames(birds)
+//           console.log(birds.entities.map(bird => bird.name))
           
 
-        }
-      } catch(error) {
-        console.log(error)
-      }
-  }
-  findBirdNames()
-}, [])
+//         }
+//       } catch(error) {
+//         console.log(error)
+//       }
+//   }
+//   findBirdNames()
+// }, [])
 
 // findBirdNames()
 //   if(count === 10){

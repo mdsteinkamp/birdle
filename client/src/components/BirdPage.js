@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react"
-import '../BirdNamesArray'
+import birdNames from "../BirdNamesArray"
 
 export default function BirdPage({ bird, onClickNext }) {
+
+  console.log(birdNames)
 
   function handleNextBird() {
     onClickNext()
