@@ -23,7 +23,6 @@ export default function BirdPage({ bird, secondBird, onClickNext }) {
 
   }
   console.log(bird)
-  // console.log(secondBird)
   console.log(image)
 
   return(

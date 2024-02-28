@@ -42,24 +42,30 @@ export default function App() {
 
   }, [])
 
-  // useEffect(() => {
-    async function getImages() {
+
+  async function getImages() {
+    if(birdsList.length == 1) {
+      try {
+        const secondBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.data.name}`)
+  
+        const images = await secondBirdResponse.json()
+        birds.first.data.images[0] = images.items[0].link
+        setBirdsList(birds)
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+
       try {
         const secondBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.next.data.name}`)
-
+  
         const images = await secondBirdResponse.json()
-        console.log(images)
-        // setImage(images.items[0].link)
         birds.first.next.data.images[0] = images.items[0].link
-        console.log(birds.first.next)
       } catch (error) {
         console.log(error)
       }
     }
-  //   getImages()
-  // }, [birdsList])
-
-
+  }
 
   function handleNextBird() {
     console.log("fetching next bird")
@@ -76,9 +82,6 @@ export default function App() {
     setBirdsList(birds)
     setStart(true)
   }
-
-  // console.log(birds) 
-  // console.log(birdsList)
 
   return (
     <div className="App">
