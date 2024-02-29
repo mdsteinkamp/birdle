@@ -9,8 +9,7 @@ export default function App() {
   const [birdsList, setBirdsList] = useState({current: {}, next: {}})
   const [start, setStart] = useState(false)
   const [visibleBird, setVisibleBird] = useState(null)
-  const [count, setCount] = useState(0)
-  const [birdNames, setBirdNames] = useState([])
+  // const [count, setCount] = useState(0)
 
   async function findBird(setBird) {
       const id = Math.floor(Math.random() * (1069)) + 1
@@ -27,70 +26,54 @@ export default function App() {
           const bird = await response.json()
           setBird(bird)
           setBirdsList(birds)
-          setVisibleBird(birds.first)
+          console.log(birds.length)
+          birds.length === 1? getFirstImage() : getImages()
+          // setVisibleBird(birds.first)
           getImages()
-          setCount(count => count + 1)
+          // setCount(count => count + 1)
 
         }
       } catch(error) {
         console.log(error)
       }
   }
-  console.log(count)
+  // console.log(count)
 
   useEffect(() => {
     for(let i = 0; i < 2; i++) {
       findBird(bird => birds.enqueue(bird))
     }
-    setVisibleBird(birds.first)
+    // setBirdsList(birds)
 
   }, [])
 
-//   useEffect(() => {
-//     async function findBirdNames() {
-//       const page = Math.floor(Math.random() * (10)) + 1
-//       try {
-//         const response = await fetch(`https://nuthatch.lastelm.software/v2/birds?page=11&pageSize=100&operator=AND`, {
-//           headers: {
-//             'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
-//           }
-//         })
-//         if (!response.ok) {
-//           console.log(response)
-//         } else {
-//           const birds = await response.json()
-//           // console.log(birds)
-//           setBirdNames(birds)
-//           console.log(birds.entities.map(bird => bird.name))
-          
+  async function getFirstImage() {
+    console.log("getting first bird image")
+    try {
+      const secondBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.data.name}`)
 
-//         }
-//       } catch(error) {
-//         console.log(error)
-//       }
-//   }
-//   findBirdNames()
-// }, [])
-
-// findBirdNames()
-//   if(count === 10){
-//     setCount(0)
-//     findBirdNames()
-//   }
+      const images = await secondBirdResponse.json()
+      birds.first.data.images[0] = images.items[0].link
+      setBirdsList(birds)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   async function getImages() {
-    if(birdsList.length == 1) {
-      try {
-        const secondBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.data.name}`)
+    // if(birdsList.length === 1) {
+    //   console.log("getting first bird image")
+    //   try {
+    //     const secondBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.data.name}`)
   
-        const images = await secondBirdResponse.json()
-        birds.first.data.images[0] = images.items[0].link
-        setBirdsList(birds)
-      } catch (error) {
-        console.log(error)
-      }
-    } else {
-
+    //     const images = await secondBirdResponse.json()
+    //     birds.first.data.images[0] = images.items[0].link
+    //     setBirdsList(birds)
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // } else {
+      console.log("getting next bird image")
       try {
         const secondBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.next.data.name}`)
   
@@ -99,7 +82,7 @@ export default function App() {
       } catch (error) {
         console.log(error)
       }
-    }
+    // }
   }
 
 
