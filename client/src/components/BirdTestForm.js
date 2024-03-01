@@ -31,7 +31,8 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
   }, [trueName])
 
   function handleChecked(position, e) {
-    const updatedChecked = checked.map((item, index) => index === position ? !item : item)
+    const updatedChecked = checked.map((item, index) => index === position ? !item : false)
+    console.log(updatedChecked)
     setChecked(updatedChecked)
     setSelectedBird(e.target.value)
   }
@@ -59,11 +60,6 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
   function handleNextBird() {
     onHandleNextBird()
   }
-
-  // console.log(checked)
-  // console.log(selectedBird)
-
-
 
   return (
     <div>
