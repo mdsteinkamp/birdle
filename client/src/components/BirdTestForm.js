@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNextBird }) {
 
-  console.log(trueName, fakeNames)
+  // console.log(trueName, fakeNames)
   const [shuffledNames, setShuffledNames] = useState([])
   const [checked, setChecked] = useState([false, false, false, false, false])
   const [selectedBird, setSelectedBird] = useState(null)
@@ -15,7 +15,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
   
     const finalNames = shuffled.slice(0, 4)
     finalNames.push(trueName)
-    console.log(finalNames)
+    // console.log(finalNames)
   
     let shuffledFinalNames = finalNames
       .map(value => ({ value, sort: Math.random() }))
@@ -32,15 +32,15 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
 
   function handleChecked(position, e) {
     const updatedChecked = checked.map((item, index) => index === position ? !item : false)
-    console.log(updatedChecked)
+    // console.log(updatedChecked)
     setChecked(updatedChecked)
     setSelectedBird(e.target.value)
   }
 
   function handleSubmit() {
-    console.log(checked)
+    // console.log(checked)
     const allFalse =  !checked.some(value => value === true)
-    console.log(allFalse)
+    // console.log(allFalse)
     allFalse ? onSubmit(null) : testBird(selectedBird)
   }
 

@@ -7,7 +7,7 @@ export default function BirdPage({ bird, onClickNext }) {
     onClickNext()
 
   }
-  console.log(bird)
+  // console.log(bird)
   const fakeBirdNames = []
   Object.values(birdNames).forEach(value => fakeBirdNames.push(value[Math.floor(Math.random() * value.length)]))
   const cleanedFakeBirdNames = fakeBirdNames.filter(name => name !== bird.name)
