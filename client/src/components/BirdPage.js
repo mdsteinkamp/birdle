@@ -28,7 +28,7 @@ export default function BirdPage({ bird, onClickNext }) {
   return(
     <div>
       {/* <h2>{bird.name}</h2> */}
-      <img src={bird.images[0]} width={500} aspect-ratio={1 / 1} alt="bird?" />
+      <img src={bird.images[0]} width={390} aspect-ratio={1 / 1} alt="bird?" />
       <BirdTestForm trueName={bird.name} fakeNames={cleanedFakeBirdNames} onSubmit={handleSubmit} onHandleNextBird={handleNextBird}/>
 
       <button onClick={handleNextBird}>Next bird</button>
