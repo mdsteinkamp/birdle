@@ -4,7 +4,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit }) {
 
   console.log(trueName, fakeNames)
   const [shuffledNames, setShuffledNames] = useState([])
-  const [checked, setChecked] = useState([false, false, false, false])
+  const [checked, setChecked] = useState([false, false, false, false, false])
   const [selectedBird, setSelectedBird] = useState(null)
 
   function createBirdNamesArray() {
@@ -39,7 +39,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit }) {
     console.log(checked)
     const allFalse =  !checked.some(value => value === true)
     console.log(allFalse)
-    allFalse ? onSubmit("no bird selected") : onSubmit(selectedBird)
+    allFalse ? onSubmit(null) : onSubmit(selectedBird)
   }
 
   // console.log(checked)

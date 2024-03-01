@@ -14,6 +14,11 @@ export default function BirdPage({ bird, onClickNext }) {
 
   function handleSubmit(selectedBird) {
     console.log(selectedBird)
+    if (!selectedBird) {
+      alert("no bird selected")
+    } else if (selectedBird === bird.name) {
+      alert("Yay that's correct!")
+    } else {alert("SORRY 😂 Try again!")}
   }
 
   return(
