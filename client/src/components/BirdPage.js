@@ -3,8 +3,6 @@ import BirdTestForm from "./BirdTestForm"
 
 export default function BirdPage({ bird, onClickNext }) {
 
-  console.log(birdNames.birdNames1[Math.floor(Math.random() * birdNames.birdNames1.length)])
-
   function handleNextBird() {
     onClickNext()
 
@@ -16,7 +14,7 @@ export default function BirdPage({ bird, onClickNext }) {
 
   return(
     <div>
-      <h2>{bird.name}</h2>
+      {/* <h2>{bird.name}</h2> */}
       <img src={bird.images[0]} width={500} aspect-ratio={1 / 1} alt="bird?" />
       <BirdTestForm trueName={bird.name} fakeNames={cleanedFakeBirdNames} />
 
