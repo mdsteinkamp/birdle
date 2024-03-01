@@ -18,6 +18,7 @@ export default function BirdPage({ bird, onClickNext }) {
       alert("no bird selected")
     } else if (selectedBird === bird.name) {
       alert("Yay that's correct!")
+      handleNextBird()
     } else {alert("SORRY 😂 Try again!")}
   }
 

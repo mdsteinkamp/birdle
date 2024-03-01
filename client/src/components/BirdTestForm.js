@@ -27,6 +27,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit }) {
 
   useEffect(() => {
     createBirdNamesArray()
+    setChecked([false, false, false, false, false])
   }, [trueName])
 
   function handleChecked(position, e) {
