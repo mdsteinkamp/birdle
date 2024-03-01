@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function BirdTestForm({ trueName, fakeNames, onSubmit }) {
+export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNextBird }) {
 
   console.log(trueName, fakeNames)
   const [shuffledNames, setShuffledNames] = useState([])
@@ -40,7 +40,24 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit }) {
     console.log(checked)
     const allFalse =  !checked.some(value => value === true)
     console.log(allFalse)
-    allFalse ? onSubmit(null) : onSubmit(selectedBird)
+    allFalse ? onSubmit(null) : testBird(selectedBird)
+  }
+
+  function testBird(bird) {
+    if (!bird) {
+      alert("no bird selected")
+    } else if (bird === trueName) {
+      alert("Yay that's correct!")
+      handleNextBird()
+    } else {
+      alert("SORRY 😂 Try again!")
+      setChecked([false, false, false, false, false])
+      
+    }
+  }
+
+  function handleNextBird() {
+    onHandleNextBird()
   }
 
   // console.log(checked)
