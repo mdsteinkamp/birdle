@@ -41,7 +41,7 @@ export default function BirdPage({ bird, onClickNext }) {
       <button onClick={nextBirdImage}>Next Image</button>
       <BirdTestForm trueName={bird.name} fakeNames={cleanedFakeBirdNames} onSubmit={handleSubmit} onHandleNextBird={handleNextBird}/>
 
-      <button onClick={handleNextBird}>Next bird</button>
+      {/* <button onClick={handleNextBird}>Next bird</button> */}
     </div>
 
   )

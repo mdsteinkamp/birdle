@@ -63,7 +63,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
 
   return (
     <div>
-      <h1>Whats that bird? 🤔</h1>
+      <h2>Whats that bird? 🤔</h2>
       <div className="bird-options-container">
         <div className="bird-option">
           <label>
@@ -142,7 +142,10 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
         </div>
 
       </div>
+      <div className="bird-test-buttons">
       <button onClick={handleSubmit}>Submit!!</button>
+      <button onClick={handleNextBird}>Next Bird</button>
+      </div>
     </div>
   )
 }
