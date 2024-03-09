@@ -1,7 +1,9 @@
+import { useState } from "react"
 import birdNames from "../BirdNamesArray"
 import BirdTestForm from "./BirdTestForm"
 
 export default function BirdPage({ bird, onClickNext }) {
+  const [imageNumber, setImageNumber] = useState(0)
 
   function handleNextBird() {
     onClickNext()
@@ -25,12 +27,18 @@ export default function BirdPage({ bird, onClickNext }) {
     }
   }
 
+  function nextBirdImage() {
+    imageNumber < 2 ? setImageNumber(imageNumber => imageNumber + 1) : setImageNumber(imageNumber => imageNumber - 2)
+
+  }
+  console.log(imageNumber)
+
   return(
     <div>
       {/* <h2>{bird.name}</h2> */}
-      <img src={bird.images[0]} width={390} aspect-ratio={1 / 1} alt="bird?" />
+      <img src={bird.images[imageNumber]} width={390} aspect-ratio={1 / 1} alt="bird?" />
       <br />
-      <button>Next Image</button>
+      <button onClick={nextBirdImage}>Next Image</button>
       <BirdTestForm trueName={bird.name} fakeNames={cleanedFakeBirdNames} onSubmit={handleSubmit} onHandleNextBird={handleNextBird}/>
 
       <button onClick={handleNextBird}>Next bird</button>
