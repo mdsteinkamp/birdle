@@ -50,10 +50,14 @@ export default function App() {
   async function getFirstImage() {
     console.log("getting first bird image")
     try {
-      const secondBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.data.name}`)
+      const firstBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.data.name}`)
 
-      const images = await secondBirdResponse.json()
+      const images = await firstBirdResponse.json()
+      console.log(images)
       birds.first.data.images[0] = images.items[0].link
+      birds.first.data.images[1] = images.items[1].link
+      birds.first.data.images[2] = images.items[2].link
+
       setBirdsList(birds)
     } catch (error) {
       console.log(error)
@@ -79,6 +83,9 @@ export default function App() {
   
         const images = await secondBirdResponse.json()
         birds.first.next.data.images[0] = images.items[0].link
+        birds.first.next.data.images[1] = images.items[1].link
+        birds.first.next.data.images[2] = images.items[2].link
+        
       } catch (error) {
         console.log(error)
       }

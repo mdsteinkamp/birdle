@@ -7,7 +7,7 @@ export default function BirdPage({ bird, onClickNext }) {
     onClickNext()
 
   }
-  // console.log(bird)
+  console.log(bird)
   const fakeBirdNames = []
   Object.values(birdNames).forEach(value => fakeBirdNames.push(value[Math.floor(Math.random() * value.length)]))
   const cleanedFakeBirdNames = fakeBirdNames.filter(name => name !== bird.name)
@@ -29,6 +29,8 @@ export default function BirdPage({ bird, onClickNext }) {
     <div>
       {/* <h2>{bird.name}</h2> */}
       <img src={bird.images[0]} width={390} aspect-ratio={1 / 1} alt="bird?" />
+      <br />
+      <button>Next Image</button>
       <BirdTestForm trueName={bird.name} fakeNames={cleanedFakeBirdNames} onSubmit={handleSubmit} onHandleNextBird={handleNextBird}/>
 
       <button onClick={handleNextBird}>Next bird</button>
