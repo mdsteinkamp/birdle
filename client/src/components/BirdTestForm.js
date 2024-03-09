@@ -64,65 +64,83 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
   return (
     <div>
       <h1>Whats that bird? 🤔</h1>
-      <div>
-        <label>
-          <input 
-            type="checkbox" 
-            checked={checked[0]}
-            onChange={e => handleChecked(0, e)}
-            value={shuffledNames[0]}
-          
-          />
-          {shuffledNames[0]}
-        </label>
-      </div>
-      <div>
-      <label>
-          <input 
-            type="checkbox" 
-            checked={checked[1]}
-            onChange={e => handleChecked(1, e)}
-            value={shuffledNames[1]}
-          
-          />
-          {shuffledNames[1]}
-        </label>
-      </div>
-      <div>
-        <label>
+      <div className="bird-options-container">
+        <div className="bird-option">
+          <label>
             <input 
-              type="checkbox" 
-              checked={checked[2]}
-              onChange={e => handleChecked(2, e)}
-              value={shuffledNames[2]}
+              type="checkbox"
+              class="defaultCheckbox"
+              checked={checked[0]}
+              onChange={e => handleChecked(0, e)}
+              value={shuffledNames[0]}
             
             />
-            {shuffledNames[2]}
+            <span>
+              {shuffledNames[0]}
+            </span>
           </label>
-      </div>
-      <div>
+        </div>
+        <div className="bird-option">
         <label>
             <input 
-              type="checkbox" 
-              checked={checked[3]}
-              onChange={e => handleChecked(3, e)}
-              value={shuffledNames[3]}
+              type="checkbox"
+              class="defaultCheckbox"
+              checked={checked[1]}
+              onChange={e => handleChecked(1, e)}
+              value={shuffledNames[1]}
             
             />
-            {shuffledNames[3]}
+            <span>
+              {shuffledNames[1]}
+            </span>
           </label>
-      </div>
-      <div>
-        <label>
-            <input 
-              type="checkbox" 
-              checked={checked[4]}
-              onChange={e => handleChecked(4, e)}
-              value={shuffledNames[4]}
-            
-            />
-            {shuffledNames[4]}
-          </label>
+        </div>
+        <div className="bird-option">
+          <label>
+              <input 
+                type="checkbox"
+                class="defaultCheckbox"
+                checked={checked[2]}
+                onChange={e => handleChecked(2, e)}
+                value={shuffledNames[2]}
+              
+              />
+              <span>
+                {shuffledNames[2]}
+              </span>
+            </label>
+        </div>
+        <div className="bird-option">
+          <label>
+              <input 
+                type="checkbox"
+                class="defaultCheckbox"
+                checked={checked[3]}
+                onChange={e => handleChecked(3, e)}
+                value={shuffledNames[3]}
+              
+              />
+              <span>
+                {shuffledNames[3]}
+              </span>
+            </label>
+        </div>
+        <div className="bird-option">
+          <label>
+              <input 
+                type="checkbox"
+                class="defaultCheckbox"
+                checked={checked[4]}
+                onChange={e => handleChecked(4, e)}
+                value={shuffledNames[4]}
+              
+              />
+              <span>
+                {shuffledNames[4]}
+              </span>
+            </label>
+        </div>
+
       </div>
       <button onClick={handleSubmit}>Submit!!</button>
     </div>

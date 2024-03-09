@@ -50,7 +50,8 @@ h2 {
 }
 
 label {
-  color: whitesmoke
+  color: whitesmoke;
+  font-size: 20px;
 }
 
 button {
@@ -59,6 +60,20 @@ button {
   border-radius: 5px;
   width: 85px;
   height: 50px;
+}
+
+.bird-options-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.bird-option {
+  height: 50px;
+}
+
+input.defaultCheckbox {
+  transform: scale(2);
+  margin-right: 10px;
 }
 
 @media (max-width: 480px) {
