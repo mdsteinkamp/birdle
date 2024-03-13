@@ -51,7 +51,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
       alert("Yay that's correct!")
       handleNextBird()
     } else {
-      alert("SORRY 😂 Try again!")
+      alert("SORRY Try again!")
       setChecked([false, false, false, false, false])
       
     }

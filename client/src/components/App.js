@@ -20,7 +20,7 @@ export default function App() {
           }
         })
         if (!response.ok) {
-          console.log(response, id)
+          // console.log(response, id)
           findBird(bird => birds.enqueue(bird))
         } else {
           const bird = await response.json()
@@ -29,7 +29,7 @@ export default function App() {
             Object.entries(bird).filter((([k, v]) => allowedProperties.includes(k))
           ))
           console.log(filteredBird)
-          setBird(bird)
+          setBird(filteredBird)
           // setBirdsList(birds)
           console.log(birds.length)
           birds.length === 1? getFirstImage() : getImages()
@@ -49,7 +49,7 @@ export default function App() {
   }, [])
 
   async function getFirstImage() {
-    console.log("getting first bird image")
+    console.log("getting first bird images")
     try {
       const firstBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.data.name}`)
 
@@ -66,7 +66,7 @@ export default function App() {
   }
 
   async function getImages() {
-      console.log("getting next bird image")
+      console.log("getting next bird images")
       try {
         const secondBirdResponse = await fetch(`https://www.googleapis.com/customsearch/v1?key=${process.env.REACT_APP_GOOGLE_SEARCH_API_KEY}&cx=e2e6b1e2c14314732&searchType=image&q=${birds.first.next.data.name}`)
   
@@ -74,6 +74,9 @@ export default function App() {
         birds.first.next.data.images[0] = images.items[0].link
         birds.first.next.data.images[1] = images.items[1].link
         birds.first.next.data.images[2] = images.items[2].link
+        // console.log(birds)
+        
+        setBirdsList(birds)
         
       } catch (error) {
         console.log(error)
@@ -83,18 +86,19 @@ export default function App() {
   function handleNextBird() {
     console.log("fetching next bird")
     birds.dequeue()
-    console.log(birds)
+    // console.log(birds)
     setBirdsList(birds)
     // console.log(birdsList)
     findBird(bird => birds.enqueue(bird))
     // console.log(birds)
     setVisibleBird(birds.first)
-    setBirdsList(birds)
+    // setBirdsList(birds)
+    // console.log(birdsList)
   }
 
   function handleStart() {
     setBirdsList(birds)
-    console.log(birds)
+    // console.log(birds)
     setStart(true)
   }
 
