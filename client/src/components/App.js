@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Queue from '../Queue';
 import '../App.css';
-import BirdPage from './BirdPage'
+import EasyModeBirdPage from './BirdPage'
 
 const birds = new Queue
 
@@ -24,16 +24,16 @@ export default function App() {
           findBird(bird => birds.enqueue(bird))
         } else {
           const bird = await response.json()
-          const allowed = ["name", "images", "recordings"]
+          const allowedProperties = ["name", "images", "recordings"]
           const filteredBird = Object.fromEntries(
-            Object.entries(bird).filter((([k, v]) => allowed.includes(k))
+            Object.entries(bird).filter((([k, v]) => allowedProperties.includes(k))
           ))
           console.log(filteredBird)
           setBird(bird)
-          setBirdsList(birds)
+          // setBirdsList(birds)
           console.log(birds.length)
           birds.length === 1? getFirstImage() : getImages()
-          getImages()
+          // getImages()
 
         }
       } catch(error) {
@@ -83,23 +83,26 @@ export default function App() {
   function handleNextBird() {
     console.log("fetching next bird")
     birds.dequeue()
-    setBirdsList(birds)
-    findBird(bird => birds.enqueue(bird))
     console.log(birds)
+    setBirdsList(birds)
+    // console.log(birdsList)
+    findBird(bird => birds.enqueue(bird))
+    // console.log(birds)
     setVisibleBird(birds.first)
     setBirdsList(birds)
   }
 
   function handleStart() {
     setBirdsList(birds)
+    console.log(birds)
     setStart(true)
   }
 
   return (
     <div className="App">
       <h1>Welcome to the BIRDLE</h1>
-      {(!start) ? <button onClick={handleStart}>Start Game</button> : null}
-      {(!start) ? null : <BirdPage bird={birdsList.first.data} onClickNext={handleNextBird} />}
+      {(!start) ? <button onClick={handleStart}>EASY MODE</button> : null}
+      {(!start) ? null : <EasyModeBirdPage bird={birdsList.first.data} onClickNext={handleNextBird} />}
     </div>
   );
 }

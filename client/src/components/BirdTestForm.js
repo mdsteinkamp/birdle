@@ -69,7 +69,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
           <label>
             <input 
               type="checkbox"
-              class="defaultCheckbox"
+              className="defaultCheckbox"
               checked={checked[0]}
               onChange={e => handleChecked(0, e)}
               value={shuffledNames[0]}
@@ -84,7 +84,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
         <label>
             <input 
               type="checkbox"
-              class="defaultCheckbox"
+              className="defaultCheckbox"
               checked={checked[1]}
               onChange={e => handleChecked(1, e)}
               value={shuffledNames[1]}
@@ -99,7 +99,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
           <label>
               <input 
                 type="checkbox"
-                class="defaultCheckbox"
+                className="defaultCheckbox"
                 checked={checked[2]}
                 onChange={e => handleChecked(2, e)}
                 value={shuffledNames[2]}
@@ -114,7 +114,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
           <label>
               <input 
                 type="checkbox"
-                class="defaultCheckbox"
+                className="defaultCheckbox"
                 checked={checked[3]}
                 onChange={e => handleChecked(3, e)}
                 value={shuffledNames[3]}
@@ -129,7 +129,7 @@ export default function BirdTestForm({ trueName, fakeNames, onSubmit, onHandleNe
           <label>
               <input 
                 type="checkbox"
-                class="defaultCheckbox"
+                className="defaultCheckbox"
                 checked={checked[4]}
                 onChange={e => handleChecked(4, e)}
                 value={shuffledNames[4]}

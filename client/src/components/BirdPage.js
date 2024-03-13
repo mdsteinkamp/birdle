@@ -2,7 +2,7 @@ import { useState } from "react"
 import birdNames from "../BirdNamesArray"
 import BirdTestForm from "./BirdTestForm"
 
-export default function BirdPage({ bird, onClickNext }) {
+export default function EasyModeBirdPageBirdPage({ bird, onClickNext }) {
   const [imageNumber, setImageNumber] = useState(0)
 
   function handleNextBird() {
