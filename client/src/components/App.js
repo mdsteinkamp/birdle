@@ -28,7 +28,7 @@ export default function App() {
           const filteredBird = Object.fromEntries(
             Object.entries(bird).filter((([k, v]) => allowedProperties.includes(k))
           ))
-          console.log(filteredBird)
+          // console.log(filteredBird)
           setBird(filteredBird)
           // setBirdsList(birds)
           console.log(birds.length)
