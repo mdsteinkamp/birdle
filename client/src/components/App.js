@@ -16,7 +16,7 @@ export default function App() {
       try {
         const response = await fetch(`https://nuthatch.lastelm.software/birds/${id}`, {
           headers: {
-            'api-key': 'd1521ee8-8e26-427a-b001-3f26f7de08e2'
+            'api-key': `${process.env.REACT_APP_NUTHATCH_API_KEY}`
           }
         })
         if (!response.ok) {
